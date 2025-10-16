@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página de Cadastro</title>
+<link rel="stylesheet" href="./estilo.css">
+
+</head>
+<body>
+
+    <form >
+      <div class="container">          
+    <div class="cadastro-form">
+      <fieldset class="fieldset">      
+        <h2>Cadastro</h2>
+        <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Nome completo">
+        <input type="text" id="endereco" name="endereco" placeholder="Endereço" >
+        <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999"   maxlength="15"  required>    
+        <input type="email" id="email" name="email"   placeholder="Email"   required>
+        <input type="password" id="senha" name="senha" placeholder="Senha" required>
+        <input type="password" placeholder="Confirmar senha" required><br><br>
+    
+         <!-- Campo para o nome do pet -->
+        
+        <label for="nome_pet"><h2>Nome do Pet</h2></label>
+         <div id="pets-container">
+         <div class="pet-block"></br>
+        <input type="text" id="nome" placeholder="Digite o nome do pet"   name="pets[0][nome]"> <br><br>
+    <!-- Campo para selecionar o sexo do pet -->
+
+    <div class="radio-group">
+    <label >Sexo do Pet: </label> 
+    <label class="radio-label"><input type="radio"  name="pets[0][sexo]" value="macho" > Macho</label>
+    <label class="radio-label"><input type="radio"  name="pets[0][sexo]" value="femea" > Fêmea</label> 
+
+        <label>Porte do Pet: </label> 
+      <!-- Campo para selecionar o porte do pet -->
+       <label  class="radio-label"><input type="radio" id="pequeno"  name="pets[0][porte]" value="pequeno"  > Pequeno</label>
+       <label  class="radio-label"><input type="radio"   id="medio"  name="pets[0][porte]"  value="Medio" > Médio</label>
+       <label class="radio-label"><input type="radio"  id="grande"  name="pets[0][porte]"  value="Grande" > Grande</label><br><br>
+    
+    
+    
+
+
+    <!-- Campo select para escolher a raça do pet -->
+    
+
+    <select class="select" id="raca"  name="pets[0][raca]" >
+        <option value="" disabled selected hidden >Selecione a raça</option>
+        <option value="vira-lata">Vira-lata</option>
+        <option value="poodle">Poodle</option>
+        <option value="labrador">Labrador</option>
+        <!-- Adicione outras opções de raça conforme necessário -->
+    </select><br>
+
+    <!-- Campo para envio de foto -->
+    <label for="foto_pet">Foto do Pet:</label>
+    <input type="file" id="foto_pet" name="pet_fotos[]" accept="image/*"><br><br>
+   </div>
+  </div>
+  </div>
+  <div id="pets"></div>
+    <button type="submit">Cadastrar</button>       
+       <button type="reset">Limpar</button>
+       
+       <button type="button" onclick="adicionarPet()">➕  <!--&#10133--> Adicionar Pet</button> 
+       </fieldset>
+      </form>  
+       
+    
+  
+
+
+</body>
+
+<script>
+  let contadorPets = 1;
+  function adicionarPet() {
+    const container = document.getElementById('pets-container');
+    const pets = document.getElementById('pets');
+
+    const blocos = container.getElementsByClassName('pet-block');
+    const ultimoBloco = blocos[blocos.length - 1];
+    const novoBloco = ultimoBloco.cloneNode(true);
+    novoBloco.querySelectorAll('input, select').forEach(el => {
+      if (el.type !== 'radio' && el.type !== 'file') el.value = '';
+      if (el.type === 'radio') {
+        el.name = el.name.replace(/_\d+$/, `_${contadorPets}`);
+        el.checked = false;
+      }
+    });
+
+    pets.appendChild(novoBloco);
+    contadorPets++;
+  }
+</script>
+
+
+</html>
