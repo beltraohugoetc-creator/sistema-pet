@@ -21,6 +21,7 @@ class usuario{
         }
 
         $this->email=($email);
+        $this->$senhaHash = password_hash ($senha,PASSWORD_DEFAULT);
     }
 
 }
