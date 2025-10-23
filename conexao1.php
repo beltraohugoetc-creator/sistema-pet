@@ -2,7 +2,7 @@
 
 try {
 
-    $conexao = new PDO('mysql:host=localhost;dbname=pet2','root','');
+    $conexao = new PDO('mysql:host=localhost;dbname=pethugo','root','');
 
 } catch(PDOException $erro) {
 

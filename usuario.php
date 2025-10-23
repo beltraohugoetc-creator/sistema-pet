@@ -24,6 +24,24 @@ class usuario{
         $this->$senhaHash = password_hash ($senha,PASSWORD_DEFAULT);
     }
 
+    public function getId(){
+        return $this->usuario_id;
+    }
+
+    public function salvar (){
+        $sql = "INSERT INTO usuarios (nome, endereco, telefone, email, senha) VALUES (?, ?, ?, ?, ?)"; 
+        $stmt = $this->conn->prepare($sql);
+
+        if($stmt->execute([$this->nome, $this->endereco, $this->telefone, $this->email, $this->senhaHash])){
+            $this->usuario_id = $this->conn->lastInsertId();
+            return $this->usuario_id;
+        } else {
+            throw new Exception ("Erro ao salvar o usuario");
+        };
+    }
+
+
+
 }
 
 ?>

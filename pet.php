@@ -7,7 +7,6 @@ class pet{
     public $sexopet;
     public $portepet;
     public $racapet;
-    public $foto_pet;
 
 }
 
